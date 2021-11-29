@@ -32,8 +32,10 @@ export async function sleep(ms: number) {
 }
 
 function doKeyboardMaestroScript(name: string, parameter?: string) {
+  const hasParameter = typeof parameter !== 'undefined'
+  if (hasParameter) parameter = parameter?.replaceAll('"', '\\"')
   const cmd = `osascript -e 'tell application "Keyboard Maestro Engine" to do script "${name}"${
-    typeof parameter !== 'undefined' ? ` with parameter "${parameter}"` : ''
+    hasParameter ? ` with parameter "${parameter}"` : ''
   }'`
   execSync(cmd)
 }
