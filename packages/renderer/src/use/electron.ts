@@ -1,3 +1,3 @@
 export function useElectron() {
-  return window.electron;
+  return window.electron
 }

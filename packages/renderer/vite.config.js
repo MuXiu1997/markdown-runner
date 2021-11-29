@@ -1,11 +1,14 @@
 /* eslint-env node */
 
-import {chrome} from '../../electron-vendors.config.json';
-import {join} from 'path';
-import {builtinModules} from 'module';
-import vue from '@vitejs/plugin-vue';
+import { chrome } from '../../electron-vendors.config.json'
+import { join } from 'path'
+import { builtinModules } from 'module'
+import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 
-const PACKAGE_ROOT = __dirname;
+const PACKAGE_ROOT = __dirname
 
 /**
  * @type {import('vite').UserConfig}
@@ -19,7 +22,21 @@ const config = {
       '/@/': join(PACKAGE_ROOT, 'src') + '/',
     },
   },
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    AutoImport({
+      dts: true,
+      include: [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue\??/, // .vue
+      ],
+      imports: ['vue', '@vueuse/core'],
+    }),
+    Components({
+      dts: true,
+      resolvers: [NaiveUiResolver()],
+    }),
+  ],
   base: '',
   server: {
     fs: {
@@ -32,13 +49,11 @@ const config = {
     outDir: 'dist',
     assetsDir: '.',
     rollupOptions: {
-      external: [
-        ...builtinModules,
-      ],
+      external: [...builtinModules],
     },
     emptyOutDir: true,
     brotliSize: false,
   },
-};
+}
 
-export default config;
+export default config
