@@ -1,2 +1,6 @@
+tests/*
+
+packages/preload/exposedInMainWorld.d.ts
+
 auto-imports.d.ts
 packages/renderer/components.d.ts
