@@ -7,11 +7,14 @@
         "./src/*"
       ]
     },
+    "allowSyntheticDefaultImports": true
   },
   "files": [
-    "src/index.ts"
+    "src/**/*.ts"
   ],
   "include": [
+    "src/**/*.ts",
+    "types/**/*.d.ts",
     "../../types/**/*.d.ts"
   ]
 }
