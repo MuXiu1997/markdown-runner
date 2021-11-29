@@ -10,7 +10,7 @@
     "allowSyntheticDefaultImports": true
   },
   "files": [
-    "src/**/*.ts"
+    "src/index.ts"
   ],
   "include": [
     "src/**/*.ts",
