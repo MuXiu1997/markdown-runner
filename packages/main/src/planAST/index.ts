@@ -15,7 +15,7 @@ export class PlanAST extends Plan {
 
   constructor(markdownTemplate: string, skipSteps: number) {
     super(markdownTemplate, skipSteps)
-    this.step = 0
+    this.step = skipSteps
 
     const templateContent = readFileSync(this.markdownTemplate).toString()
 
@@ -24,7 +24,6 @@ export class PlanAST extends Plan {
       console.log(JSON.stringify(root, undefined, 2))
     this.operationList = []
     this.walk(root)
-    this.operationList.splice(0, this.skipSteps)
     this.openTypora()
   }
 
