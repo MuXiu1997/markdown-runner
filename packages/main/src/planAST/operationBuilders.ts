@@ -68,7 +68,7 @@ export const code: OperationBuilder = (node) => {
       return Promise.resolve()
     },
   ]
-  if (code.lang.toLowerCase() === 'markdown') {
+  if (code?.lang?.toLowerCase() === 'markdown') {
     before.push(
       ...code.value.split('\n').map((row, idx) => {
         return () => {
